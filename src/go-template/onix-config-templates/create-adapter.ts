@@ -202,8 +202,8 @@ function createAdapterYaml(params: AdapterParams) {
 					plugins: {
 						router: getRounterPlugin("form_router"),
 					},
+					steps: ["addRoute"],
 				},
-				steps: ["addRoute"],
 			},
 			{
 				name: "standaloneValidator",
@@ -222,8 +222,8 @@ function createAdapterYaml(params: AdapterParams) {
 							},
 						},
 					},
+					steps: ["validateSchema", "validateOndcPayload"],
 				},
-				steps: ["validateSchema", "validateOndcPayload"],
 			},
 			{
 				name: "BapTxnReceiver",

@@ -201,7 +201,7 @@ async function createAdapterConfigs(domain: string, version: string) {
 		const params = {
 			domain: domain,
 			version: version,
-			port: parseInt(process.env.ONIX_PORT || "8080"),
+			port: parseInt(process.env.PORT || "8080"),
 			redisAddress: `${process.env.REDIS_HOST || "localhost"}:${process.env.REDIS_PORT || "6379"}`,
 			configServiceURL: process.env.CONFIG_SERVICE_URL || "",
 			mockServiceURL: process.env.MOCK_SERVER_URL || "",

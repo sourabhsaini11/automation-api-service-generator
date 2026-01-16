@@ -44,7 +44,7 @@ COPY --from=builder /app/schemas ./schemas
 COPY --from=builder /temp/config ./config
 
 # Expose port (adjust if needed)
-EXPOSE 8080
+# EXPOSE 8080
 
 # Run the server with config from temp/config
 CMD ["./server", "--config=./config/adapter.yaml"]

@@ -3,14 +3,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: "onix-server-${SERVICE_NAME}"
+    container_name: "api-service-${SERVICE_NAME}"
     ports:
       - "${PORT}:${PORT}"
     volumes:
       - ./temp/config:/app/temp/config:ro
-      - ./temp/validationpkg:/app/temp/validationpkg:ro
     env_file:
-      - automation-beckn-onix/.env
+      - .env
     networks:
       - onix-network
     restart: unless-stopped

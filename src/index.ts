@@ -11,6 +11,7 @@ import dotenv from "dotenv";
 import { clearAndCopy } from "./utils/fs-utilts.js";
 import { createEnvFile } from "./utils/env-file.js";
 import fs from "fs";
+import { CreateOnixServer } from "./go-template/create-onix/index.js";
 dotenv.config();
 
 export const createApiServiceLayer = async () => {
@@ -80,6 +81,12 @@ const moveRelevantFiles = async () => {
 
 (async () => {
 	console.log("Starting API Service Layer Creation...");
-	await createApiServiceLayer();
+
+	const isOnix = process.env.IS_ONIX_ENABLED === "true";
+	if (!isOnix) {
+		await createApiServiceLayer();
+	} else {
+		await CreateOnixServer();
+	}
 	console.log("API Service Layer Creation Completed.");
 })();

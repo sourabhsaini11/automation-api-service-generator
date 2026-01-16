@@ -33,3 +33,17 @@ NO_TOKEN=${process.env.NO_TOKEN}
 `;
 	writeFileSync(path.resolve(__dirname, "../../generated/.env"), env);
 };
+
+export async function createOnixEnvFile() {
+	const env = `SUBSCRIBER_ID="${process.env.SUBSCRIBER_ID}"
+		UNIQUE_KEY_ID="${process.env.UKID}"
+		SIGNING_PRIVATE="${process.env.SIGN_PRIVATE_KEY}"
+		SIGNING_PUBLIC="${process.env.SIGN_PUBLIC_KEY}"
+		IN_HOUSE_URL="${process.env.IN_HOUSE_REGISTRY}"
+		REDIS_PASSWORD="${process.env.REDIS_PASSWORD}"
+		REDIS_USERNAME="${process.env.REDIS_USERNAME}"`;
+	writeFileSync(
+		path.resolve(__dirname, "../../build-output/automation-beckn-onix/.env"),
+		env
+	);
+}

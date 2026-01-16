@@ -26,7 +26,7 @@ COPY temp/config ./config
 # COPY temp/validationpkg ./validationpkg
 
 # Copy .env file if exists
-COPY .env ./.env
+# COPY .env ./.env
 
 # Expose port (adjust if needed)
 # EXPOSE 8080

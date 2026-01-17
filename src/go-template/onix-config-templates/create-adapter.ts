@@ -271,7 +271,7 @@ function createMockRouter(params: AdapterParams) {
 				version: params.version,
 				targetType: "jsonPath",
 				target: {
-					jsonPath: "$.context.subscriber_url",
+					jsonPath: "$.cookies.subscriber_url",
 				},
 				actAsProxy: true,
 				endpoints: ALL_ACTIONS,

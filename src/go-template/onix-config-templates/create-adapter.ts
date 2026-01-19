@@ -194,7 +194,7 @@ function createAdapterYaml(params: AdapterParams) {
 		modules: [
 			{
 				name: "formReceiver",
-				path: `/api-service/${params.domain}/${params.version}/html-form`,
+				path: `/api-service/${params.domain}/${params.version}/form/html-form`,
 				handler: {
 					type: "std",
 					role: "bap",

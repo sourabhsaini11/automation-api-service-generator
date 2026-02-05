@@ -18,7 +18,7 @@ export const createApiServiceLayer = async () => {
 	console.log("Creating API Service Layer...");
 	const buildString = readFileSync(
 		path.resolve(__dirname, "../src/config/build.yaml"),
-		"utf8"
+		"utf8",
 	);
 	const buildParsed = (await loadAndDereferenceYaml(buildString)) as any;
 	const valParsed = buildParsed["x-validations"];
@@ -39,40 +39,40 @@ export const createApiServiceLayer = async () => {
 const moveRelevantFiles = async () => {
 	await clearAndCopy(
 		path.resolve(__dirname, "../template/automation-api-service"),
-		path.resolve(__dirname, "../build-output/automation-api-service")
+		path.resolve(__dirname, "../build-output/automation-api-service"),
 	);
 	await clearAndCopy(
 		path.resolve(__dirname, "../generated/L1-validations"),
 		path.resolve(
 			__dirname,
-			"../build-output/automation-api-service/src/validations/L1-validations"
-		)
+			"../build-output/automation-api-service/src/validations/L1-validations",
+		),
 	);
 
 	fse.copySync(
 		path.resolve(__dirname, "../generated/.env"),
-		path.resolve(__dirname, "../build-output/automation-api-service/.env")
+		path.resolve(__dirname, "../build-output/automation-api-service/.env"),
 	);
 
 	await clearAndCopy(
 		path.resolve(__dirname, "../generated/L0-schemas"),
 		path.resolve(
 			__dirname,
-			"../build-output/automation-api-service/src/validations/L0-schemas"
-		)
+			"../build-output/automation-api-service/src/validations/L0-schemas",
+		),
 	);
 
 	if (
 		fs.existsSync(
-			path.resolve(__dirname, "../src/config/L1-custom-validations")
+			path.resolve(__dirname, "../src/config/L1-custom-validations"),
 		)
 	) {
 		await clearAndCopy(
 			path.resolve(__dirname, "../src/config/L1-custom-validations"),
 			path.resolve(
 				__dirname,
-				"../build-output/automation-api-service/src/validations/L1-custom-validations"
-			)
+				"../build-output/automation-api-service/src/validations/L1-custom-validations",
+			),
 		);
 	}
 	console.log("deleting generated folder");
@@ -84,8 +84,10 @@ const moveRelevantFiles = async () => {
 
 	const isOnix = process.env.IS_ONIX_ENABLED === "true";
 	if (!isOnix) {
+		console.log("Generating Non-Onix API Service Layer...");
 		await createApiServiceLayer();
 	} else {
+		console.log("Generating Onix API Service Layer...");
 		await CreateOnixServer();
 	}
 	console.log("API Service Layer Creation Completed.");

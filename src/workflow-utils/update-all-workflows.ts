@@ -82,7 +82,7 @@ function parseArgs(): ScriptArgs {
 async function getAllBranches(
 	apiClient: AxiosInstance,
 	owner: string,
-	repo: string
+	repo: string,
 ): Promise<string[]> {
 	console.log(`📡 Fetching branches for ${owner}/${repo}...`);
 	const allBranches: string[] = [];
@@ -95,7 +95,7 @@ async function getAllBranches(
 				params: { per_page: perPage, page: page },
 			});
 			const branchesOnPage = response.data.map(
-				(branch: { name: string }) => branch.name
+				(branch: { name: string }) => branch.name,
 			);
 			if (branchesOnPage.length === 0) break;
 
@@ -122,7 +122,7 @@ async function updateOrCreateFileInBranch(
 		filePathInRepo: string;
 		fileContentBase64: string;
 		commitMessage: string;
-	}
+	},
 ) {
 	const {
 		owner,
@@ -143,7 +143,7 @@ async function updateOrCreateFileInBranch(
 
 		if (existingContentBase64 === fileContentBase64) {
 			console.log(
-				`  🔍 File is already up-to-date in branch '${branch}'. Skipping.`
+				`  🔍 File is already up-to-date in branch '${branch}'. Skipping.`,
 			);
 			return;
 		}
@@ -173,7 +173,7 @@ async function updateOrCreateFileInBranch(
 				? error.response?.data?.message
 				: (error as Error).message;
 			console.error(
-				`  ❌ Failed to process branch '${branch}': ${errorMessage}`
+				`  ❌ Failed to process branch '${branch}': ${errorMessage}`,
 			);
 		}
 	}
@@ -228,21 +228,21 @@ async function main() {
 				});
 				// Optional delay to avoid hitting secondary rate limits
 				await new Promise((resolve) => setTimeout(resolve, 250));
-			} catch (error) {
+			} catch (error: any) {
 				console.error(
-					`  ❌ Error processing branch '${branch}': ${error instanceof Error ? error.message : error}`
+					`  ❌ Error processing branch '${branch}': ${error instanceof Error ? error.message : error}`,
 				);
 			}
 		}
 
 		console.log("\n--- All Done! ---");
 		console.log(
-			"✅ Script finished. The workflow file has been synced across all branches."
+			"✅ Script finished. The workflow file has been synced across all branches.",
 		);
 	} catch (error) {
 		console.error(error);
 		console.error(
-			"\n❌ An unrecoverable error occurred. The script will now exit."
+			"\n❌ An unrecoverable error occurred. The script will now exit.",
 		);
 		// process.exit(1);
 	}
